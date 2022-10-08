@@ -1,4 +1,6 @@
+import { useMemo } from 'react';
 import styled from 'styled-components';
+import { arabicToRoman } from './utils';
 
 interface ElevatorLevelProps {
   level: number;
@@ -11,5 +13,7 @@ const StyledElevatorLevel = styled.div`
 `;
 
 export function ElevatorLevel({ level }: ElevatorLevelProps) {
-  return <StyledElevatorLevel>{level}</StyledElevatorLevel>;
+  const RomanLevel = useMemo(() => arabicToRoman(level), [level]);
+
+  return <StyledElevatorLevel>{RomanLevel}</StyledElevatorLevel>;
 }
