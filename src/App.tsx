@@ -1,4 +1,3 @@
-import './App.css';
 import { ElevatorShaft } from './modules/ElevatorShaft/ElevatorShaft';
 
 function App() {
