@@ -1,4 +1,4 @@
-import { ElevatorShaft } from './modules/ElevatorShaft/ElevatorShaft';
+import { ElevatorShaft } from './modules/ElevatorShaft';
 
 function App() {
   return (
