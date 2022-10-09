@@ -7,9 +7,10 @@ export class ElevatorSystem {
 
   constructor(numberOfElevators: number, numberOfFloors: number) {
     this.elevators = [];
-    this.createElevators();
     this.numberOfFloors = numberOfFloors;
     this.numberOfElevators = numberOfElevators;
+    this.createElevators();
+    console.log(this.numberOfElevators);
   }
 
   createElevators() {
@@ -44,5 +45,13 @@ export class ElevatorSystem {
 
   status(): ElevatorCar[] {
     return this.elevators;
+  }
+
+  get getNumberOfFloors() {
+    return this.numberOfFloors;
+  }
+
+  get getNumberOfElevators() {
+    return this.numberOfElevators;
   }
 }

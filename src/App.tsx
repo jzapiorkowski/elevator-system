@@ -1,8 +1,9 @@
 import { Elevators } from 'modules/Elevators';
 import styled from 'styled-components';
 import usePrepareElevatorButtons from 'hooks/usePrepareElevatorButtons';
+import { ChangeSystemForm } from 'modules/ChangeSystemForm';
 
-const StyledAppContainer = styled.div`
+const StyledElevatorSystemContainer = styled.div`
   display: flex;
 `;
 
@@ -15,10 +16,13 @@ function App() {
   const { elevatorButtons } = usePrepareElevatorButtons();
 
   return (
-    <StyledAppContainer>
-      <StyledButtonsContainer>{elevatorButtons}</StyledButtonsContainer>
-      <Elevators />
-    </StyledAppContainer>
+    <>
+      <ChangeSystemForm />
+      <StyledElevatorSystemContainer>
+        <StyledButtonsContainer>{elevatorButtons}</StyledButtonsContainer>
+        <Elevators />
+      </StyledElevatorSystemContainer>
+    </>
   );
 }
 
