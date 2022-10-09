@@ -5,11 +5,11 @@ export class ElevatorSystem {
   private numberOfFloors: number;
   private numberOfElevators: number;
 
-  constructor() {
+  constructor(numberOfElevators: number, numberOfFloors: number) {
     this.elevators = [];
     this.createElevators();
-    this.numberOfFloors = 6;
-    this.numberOfElevators = 4;
+    this.numberOfFloors = numberOfFloors;
+    this.numberOfElevators = numberOfElevators;
   }
 
   createElevators() {

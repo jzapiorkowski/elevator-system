@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { ElevatorSystem } from 'utils/ElevatorSystem/ElevatorSystem';
 import { arabicToRoman } from './utils';
+import { useSelector } from 'react-redux';
+import { StateType } from 'store';
 
 interface ElevatorLevelProps {
   level: number;
-  system: ElevatorSystem;
   elevatorIndex: number;
 }
 
@@ -21,11 +22,11 @@ const StyledContainer = styled.div`
   gap: 20px;
 `;
 
-export function ElevatorLevel({
-  level,
-  system,
-  elevatorIndex,
-}: ElevatorLevelProps) {
+export function ElevatorLevel({ level, elevatorIndex }: ElevatorLevelProps) {
+  const system = useSelector<StateType, ElevatorSystem>(
+    (state) => state.ElevatorSystem.system
+  );
+
   const RomanLevel = useMemo(() => arabicToRoman(level), [level]);
   const [displayElevatorCar, setDisplayElevatorCar] = useState<'x' | null>(
     null
