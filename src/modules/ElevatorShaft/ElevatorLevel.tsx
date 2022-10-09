@@ -39,7 +39,7 @@ export function ElevatorLevel({ level, system }: ElevatorLevelProps) {
 
   return (
     <StyledContainer>
-      <ElevatorCallButton direction='up' />
+      <ElevatorCallButton level={level} system={system} />
       <StyledElevatorLevel>
         {RomanLevel} {displayElevatorCar}
       </StyledElevatorLevel>
