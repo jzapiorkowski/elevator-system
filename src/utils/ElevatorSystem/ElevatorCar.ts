@@ -3,12 +3,14 @@ export class ElevatorCar {
   private currentLevel: number;
   private queueUp: number[];
   private queueDown: number[];
+  private elevatorMotionStatus: 'up' | 'down' | 'idle';
 
   constructor(id: number) {
     this.id = id;
     this.currentLevel = 1;
     this.queueUp = [];
     this.queueDown = [];
+    this.elevatorMotionStatus = 'idle';
   }
 
   addToQueue(pickupLevel: number, destinationLevel: number) {
@@ -31,7 +33,7 @@ export class ElevatorCar {
     }
     // console.log(`Elevator${this.id} queue up: ${this.queueUp}`);
     // console.log(`Elevator${this.id} queue down: ${this.queueDown}`);
-    this.moveElevator(pickupLevel);
+    if (this.elevatorMotionStatus === 'idle') this.moveElevator(pickupLevel);
   }
 
   removeFromQueueUp(requestedLevel: number) {
@@ -54,6 +56,7 @@ export class ElevatorCar {
     );
 
     if (this.currentLevel < requestedLevel) {
+      console.log(this.queueDown, this.queueUp);
       this.moveUp();
     } else {
       this.moveDown();
@@ -62,6 +65,7 @@ export class ElevatorCar {
 
   async moveUp() {
     console.log(`Elevator${this.id} is going up`);
+    this.elevatorMotionStatus = 'up';
 
     while (this.currentLevel < this.queueUp[this.queueUp.length - 1]) {
       await this.waitForLevelChange();
@@ -80,11 +84,13 @@ export class ElevatorCar {
       console.log(
         `Elevator${this.id} is waiting for a call on Level ${this.currentLevel}`
       );
+      this.elevatorMotionStatus = 'idle';
     }
   }
 
   async moveDown() {
     console.log(`Elevator${this.id} is going down`);
+    this.elevatorMotionStatus = 'down';
 
     while (this.currentLevel > this.queueDown[this.queueDown.length - 1]) {
       await this.waitForLevelChange();
@@ -101,6 +107,7 @@ export class ElevatorCar {
       console.log(
         `Elevator${this.id} is waiting for a call on Level ${this.currentLevel}`
       );
+      this.elevatorMotionStatus = 'idle';
     }
   }
 
