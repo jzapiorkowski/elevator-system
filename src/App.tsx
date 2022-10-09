@@ -1,6 +1,4 @@
 import { Elevators } from 'modules/Elevators';
-import { useMemo } from 'react';
-import { ElevatorSystem } from './utils/ElevatorSystem/ElevatorSystem';
 import styled from 'styled-components';
 import usePrepareElevatorButtons from 'hooks/usePrepareElevatorButtons';
 
@@ -14,13 +12,12 @@ const StyledButtonsContainer = styled.div`
 `;
 
 function App() {
-  const system = useMemo(() => new ElevatorSystem(4, 6), []);
-  const { elevatorButtons } = usePrepareElevatorButtons({ system });
+  const { elevatorButtons } = usePrepareElevatorButtons();
 
   return (
     <StyledAppContainer>
       <StyledButtonsContainer>{elevatorButtons}</StyledButtonsContainer>
-      <Elevators system={system} />
+      <Elevators />
     </StyledAppContainer>
   );
 }

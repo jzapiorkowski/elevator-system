@@ -1,13 +1,8 @@
 import { ElevatorShaft } from 'modules/ElevatorShaft';
-import { ElevatorSystem } from 'utils/ElevatorSystem/ElevatorSystem';
 
-interface usePrepareElevatorsProps {
-  system: ElevatorSystem;
-}
-
-export function usePrepareElevators({ system }: usePrepareElevatorsProps) {
+export function usePrepareElevators() {
   const elevators = Array.from(Array(4).keys()).map((index) => (
-    <ElevatorShaft system={system} elevatorIndex={index} />
+    <ElevatorShaft elevatorIndex={index} />
   ));
 
   return { elevators };

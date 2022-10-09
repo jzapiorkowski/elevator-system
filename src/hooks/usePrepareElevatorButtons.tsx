@@ -1,22 +1,13 @@
 import { ElevatorCallButton } from 'modules/ElevatorCallButton';
-import React, { useMemo } from 'react';
-import { ElevatorSystem } from 'utils/ElevatorSystem/ElevatorSystem';
+import { useMemo } from 'react';
 
-interface usePrepareElevatorButtonsProps {
-  system: ElevatorSystem;
-}
-
-export default function usePrepareElevatorButtons({
-  system,
-}: usePrepareElevatorButtonsProps) {
+export default function usePrepareElevatorButtons() {
   const elevatorButtons = useMemo(
     () =>
       Array.from(Array(6).keys())
-        .map((level) => (
-          <ElevatorCallButton system={system} level={level + 1} />
-        ))
+        .map((level) => <ElevatorCallButton level={level + 1} />)
         .reverse(),
-    [system]
+    []
   );
 
   return { elevatorButtons };

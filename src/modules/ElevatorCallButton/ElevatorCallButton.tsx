@@ -1,11 +1,12 @@
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { StateType } from 'store';
 import { ElevatorSystem } from 'utils/ElevatorSystem/ElevatorSystem';
 
 interface ElevatorCallButtonProps {
   direction?: 'up' | 'down';
   level: number;
-  system: ElevatorSystem;
 }
 
 const StyledElevatorButton = styled.button`
@@ -36,9 +37,11 @@ const StyledInput = styled.input`
 export function ElevatorCallButton({
   direction,
   level,
-  system,
 }: ElevatorCallButtonProps) {
   const [destinationLevel, setDestinationLevel] = useState<number | null>(null);
+  const system = useSelector<StateType, ElevatorSystem>(
+    (state) => state.ElevatorSystem.system
+  );
 
   const handleClick = useCallback(() => {
     if (destinationLevel) {
