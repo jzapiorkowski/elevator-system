@@ -10,7 +10,6 @@ export class ElevatorSystem {
     this.numberOfFloors = numberOfFloors;
     this.numberOfElevators = numberOfElevators;
     this.createElevators();
-    console.log(this.numberOfElevators);
   }
 
   createElevators() {
@@ -35,11 +34,7 @@ export class ElevatorSystem {
         bestDistance = distance(elevator);
       }
     });
-    console.log(
-      `Calling Elevator${
-        closestIdleElevator!.id
-      } from floor ${pickupLevel} to floor ${destinationLevel}`
-    );
+
     closestIdleElevator!.addToQueue(pickupLevel, destinationLevel);
   }
 
