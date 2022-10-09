@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { setElevatorSystem } from 'state';
+import { Input } from 'components/Input';
 
 const StyledInputContainer = styled.div`
   display: flex;
@@ -51,7 +52,7 @@ export function ChangeSystemForm() {
       <h1>Change system data:</h1>
       <StyledInputContainer>
         <label>Number of floors</label>
-        <input
+        <Input
           type='number'
           value={numberOfFloors}
           onChange={handleNumberOfFloorsChange}
@@ -59,7 +60,7 @@ export function ChangeSystemForm() {
       </StyledInputContainer>
       <StyledInputContainer>
         <label>Number of elevators</label>
-        <input
+        <Input
           type='number'
           value={numberOfElevators}
           onChange={handleNumberOfElevatorsChange}
