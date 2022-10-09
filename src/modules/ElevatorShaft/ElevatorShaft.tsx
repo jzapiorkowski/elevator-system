@@ -1,13 +1,19 @@
-import { ElevatorLevel } from './ElevatorLevel';
+import styled from 'styled-components';
+import { ElevatorSystem } from 'utils/ElevatorSystem/ElevatorSystem';
+import { usePrepareElevatorShaft } from './hooks';
 
-export function ElevatorShaft({ system }: { system: any }) {
-  const numberOfLevels = 6;
+interface ElevatorShaftProps {
+  system: ElevatorSystem;
+  elevatorIndex: number;
+}
 
-  const shaft = Array.from(Array(numberOfLevels).keys())
-    .map((level) => {
-      return <ElevatorLevel level={level + 1} system={system} />;
-    })
-    .reverse();
+const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-  return <>{shaft}</>;
+export function ElevatorShaft({ system, elevatorIndex }: ElevatorShaftProps) {
+  const { shaft } = usePrepareElevatorShaft({ system, elevatorIndex });
+
+  return <StyledContainer>{shaft}</StyledContainer>;
 }

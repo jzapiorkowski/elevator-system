@@ -20,6 +20,19 @@ const StyledElevatorButton = styled.button`
   align-items: center;
 `;
 
+const StyledContainer = styled.div`
+  display: flex;
+  width: 250px;
+  height: 62px;
+  align-items: center;
+  gap: 20px;
+`;
+
+const StyledInput = styled.input`
+  height: 40px;
+  width: 150px;
+`;
+
 export function ElevatorCallButton({
   direction,
   level,
@@ -41,14 +54,14 @@ export function ElevatorCallButton({
   );
 
   return (
-    <>
-      <input
+    <StyledContainer>
+      <StyledInput
         type='number'
         placeholder='destination level and submit'
         value={destinationLevel || ''}
         onChange={handleInputChange}
       />
-      <StyledElevatorButton onClick={handleClick}>⟏</StyledElevatorButton>;
-    </>
+      <StyledElevatorButton onClick={handleClick}>⟏</StyledElevatorButton>
+    </StyledContainer>
   );
 }
