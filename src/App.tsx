@@ -1,13 +1,27 @@
-import { ElevatorShaft } from './modules/ElevatorShaft';
+import { Elevators } from 'modules/Elevators';
+import { useMemo } from 'react';
 import { ElevatorSystem } from './utils/ElevatorSystem/ElevatorSystem';
+import styled from 'styled-components';
+import usePrepareElevatorButtons from 'hooks/usePrepareElevatorButtons';
+
+const StyledAppContainer = styled.div`
+  display: flex;
+`;
+
+const StyledButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 function App() {
-  const system = new ElevatorSystem();
+  const system = useMemo(() => new ElevatorSystem(), []);
+  const { elevatorButtons } = usePrepareElevatorButtons({ system });
 
   return (
-    <div className='App'>
-      <ElevatorShaft system={system} />
-    </div>
+    <StyledAppContainer>
+      <StyledButtonsContainer>{elevatorButtons}</StyledButtonsContainer>
+      <Elevators system={system} />
+    </StyledAppContainer>
   );
 }
 

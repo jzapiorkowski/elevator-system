@@ -1,4 +1,3 @@
-import { ElevatorCallButton } from 'modules/ElevatorCallButton';
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { ElevatorSystem } from 'utils/ElevatorSystem/ElevatorSystem';
@@ -39,7 +38,6 @@ export function ElevatorLevel({ level, system }: ElevatorLevelProps) {
 
   return (
     <StyledContainer>
-      <ElevatorCallButton level={level} system={system} />
       <StyledElevatorLevel>
         {RomanLevel} {displayElevatorCar}
       </StyledElevatorLevel>
