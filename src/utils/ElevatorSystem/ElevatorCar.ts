@@ -12,7 +12,7 @@ export class ElevatorCar {
   }
 
   addToQueue(pickupLevel: number, destinationLevel: number) {
-    if (this.currentLevel < destinationLevel) {
+    if (this.currentLevel < pickupLevel) {
       this.queueUp.push(pickupLevel);
       this.queueUp.sort((a, b) => a - b);
     } else {
@@ -31,7 +31,7 @@ export class ElevatorCar {
     }
     // console.log(`Elevator${this.id} queue up: ${this.queueUp}`);
     // console.log(`Elevator${this.id} queue down: ${this.queueDown}`);
-    this.moveElevator(destinationLevel);
+    this.moveElevator(pickupLevel);
   }
 
   removeFromQueueUp(requestedLevel: number) {
