@@ -1,3 +1,4 @@
+import { ElevatorCallButton } from 'modules/ElevatorCallButton';
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { ElevatorSystem } from 'utils/ElevatorSystem/ElevatorSystem';
@@ -12,6 +13,12 @@ const StyledElevatorLevel = styled.div`
   border: solid black 1px;
   padding: 20px 50px;
   width: 150px;
+`;
+
+const StyledContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 export function ElevatorLevel({ level, system }: ElevatorLevelProps) {
@@ -31,8 +38,11 @@ export function ElevatorLevel({ level, system }: ElevatorLevelProps) {
   }, [level, system]);
 
   return (
-    <StyledElevatorLevel>
-      {RomanLevel} {displayElevatorCar}
-    </StyledElevatorLevel>
+    <StyledContainer>
+      <ElevatorCallButton direction='up' />
+      <StyledElevatorLevel>
+        {RomanLevel} {displayElevatorCar}
+      </StyledElevatorLevel>
+    </StyledContainer>
   );
 }
