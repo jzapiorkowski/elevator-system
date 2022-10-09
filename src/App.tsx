@@ -14,7 +14,7 @@ const StyledButtonsContainer = styled.div`
 `;
 
 function App() {
-  const system = useMemo(() => new ElevatorSystem(), []);
+  const system = useMemo(() => new ElevatorSystem(4, 6), []);
   const { elevatorButtons } = usePrepareElevatorButtons({ system });
 
   return (
