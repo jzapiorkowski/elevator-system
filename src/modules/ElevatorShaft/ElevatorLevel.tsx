@@ -1,9 +1,11 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { ElevatorSystem } from 'utils/ElevatorSystem/ElevatorSystem';
 import { arabicToRoman } from './utils';
 
 interface ElevatorLevelProps {
   level: number;
+  system: ElevatorSystem;
 }
 
 const StyledElevatorLevel = styled.div`
@@ -12,8 +14,25 @@ const StyledElevatorLevel = styled.div`
   width: 150px;
 `;
 
-export function ElevatorLevel({ level }: ElevatorLevelProps) {
+export function ElevatorLevel({ level, system }: ElevatorLevelProps) {
   const RomanLevel = useMemo(() => arabicToRoman(level), [level]);
+  const [displayElevatorCar, setDisplayElevatorCar] = useState<'x' | null>(
+    null
+  );
 
-  return <StyledElevatorLevel>{RomanLevel}</StyledElevatorLevel>;
+  useEffect(() => {
+    const getCurrentLevelInterval = setInterval(() => {
+      setDisplayElevatorCar(
+        system.status().getCurrentLevel === level ? 'x' : null
+      );
+    }, 300);
+
+    return () => clearInterval(getCurrentLevelInterval);
+  }, [level, system]);
+
+  return (
+    <StyledElevatorLevel>
+      {RomanLevel} {displayElevatorCar}
+    </StyledElevatorLevel>
+  );
 }
