@@ -1,5 +1,5 @@
 export class ElevatorCar {
-  private id: number;
+  public id: number;
   private currentLevel: number;
   private queueUp: number[];
   private queueDown: number[];
@@ -117,5 +117,9 @@ export class ElevatorCar {
 
   get getCurrentLevel() {
     return this.currentLevel;
+  }
+
+  get getCurrentMotionStatus() {
+    return this.elevatorMotionStatus;
   }
 }

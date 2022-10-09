@@ -1,28 +1,48 @@
 import { ElevatorCar } from './ElevatorCar';
-import { ElevatorStatus } from './types';
 
 export class ElevatorSystem {
   private elevators: ElevatorCar[] | [];
+  private numberOfFloors: number;
+  private numberOfElevators: number;
 
   constructor() {
     this.elevators = [];
     this.createElevators();
+    this.numberOfFloors = 6;
+    this.numberOfElevators = 4;
   }
 
   createElevators() {
-    this.elevators = [new ElevatorCar(0)];
+    this.elevators = Array.from(Array(this.numberOfElevators).keys()).map(
+      (index) => new ElevatorCar(index)
+    );
   }
 
   pickup(pickupLevel: number, destinationLevel: number) {
-    this.elevators[0].addToQueue(pickupLevel, destinationLevel);
+    const idleElevators = this.elevators.filter(
+      (elevator) => elevator.getCurrentMotionStatus === 'idle'
+    );
+    const distance = (elevator: ElevatorCar) =>
+      Math.abs(elevator.getCurrentLevel - pickupLevel);
+
+    let closestIdleElevator: null | ElevatorCar = null;
+    let bestDistance = this.numberOfFloors;
+
+    idleElevators.forEach((elevator) => {
+      if (distance(elevator) < bestDistance) {
+        closestIdleElevator = elevator;
+        bestDistance = distance(elevator);
+      }
+    });
+    console.log(
+      `Calling Elevator${
+        closestIdleElevator!.id
+      } from floor ${pickupLevel} to floor ${destinationLevel}`
+    );
+    closestIdleElevator!.addToQueue(pickupLevel, destinationLevel);
   }
 
-  //   update(Int, Int, Int) {}
-
-  step() {}
-
-  // status(): ElevatorStatus {
-  status(): ElevatorCar {
-    return this.elevators[0];
+  status(): ElevatorCar[] {
+    return this.elevators;
   }
 }

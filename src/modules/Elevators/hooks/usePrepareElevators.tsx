@@ -7,7 +7,7 @@ interface usePrepareElevatorsProps {
 
 export function usePrepareElevators({ system }: usePrepareElevatorsProps) {
   const elevators = Array.from(Array(4).keys()).map((index) => (
-    <ElevatorShaft system={system} />
+    <ElevatorShaft system={system} elevatorIndex={index} />
   ));
 
   return { elevators };
