@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { StateType } from 'store';
 import { ElevatorSystem } from 'utils/ElevatorSystem/ElevatorSystem';
+import { Input } from 'components/Input';
 
 interface ElevatorCallButtonProps {
   direction?: 'up' | 'down';
@@ -29,11 +30,6 @@ const StyledContainer = styled.div`
   gap: 20px;
 `;
 
-const StyledInput = styled.input`
-  height: 40px;
-  width: 150px;
-`;
-
 export function ElevatorCallButton({
   direction,
   level,
@@ -58,7 +54,7 @@ export function ElevatorCallButton({
 
   return (
     <StyledContainer>
-      <StyledInput
+      <Input
         type='number'
         placeholder='destination level and submit'
         value={destinationLevel || ''}
