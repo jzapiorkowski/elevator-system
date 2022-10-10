@@ -23,10 +23,17 @@ const StyledButton = styled.button`
   width: 100px;
 `;
 
+const StyledError = styled.p`
+  color: red;
+  text-align: center;
+  margin-bottom: 40px;
+`;
+
 export function ChangeSystemForm() {
   const dispatch = useDispatch();
   const [numberOfFloors, setNumberOfFloors] = useState<number>(6);
   const [numberOfElevators, setNumberOfElevators] = useState<number>(4);
+  const [showError, setShowError] = useState<boolean>(false);
 
   const handleNumberOfFloorsChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,30 +50,41 @@ export function ChangeSystemForm() {
   );
 
   const handleSubmit = useCallback(() => {
-    if (numberOfFloors > 1 && numberOfElevators > 0)
+    if (numberOfFloors > 1 && numberOfElevators > 0) {
       dispatch(setElevatorSystem({ numberOfFloors, numberOfElevators }));
+      setShowError(false);
+    } else {
+      setShowError(true);
+    }
   }, [dispatch, numberOfElevators, numberOfFloors]);
 
   return (
-    <StyledFormContainer>
-      <h1>Change system data:</h1>
-      <StyledInputContainer>
-        <label>Number of floors</label>
-        <Input
-          type='number'
-          value={numberOfFloors}
-          onChange={handleNumberOfFloorsChange}
-        />
-      </StyledInputContainer>
-      <StyledInputContainer>
-        <label>Number of elevators</label>
-        <Input
-          type='number'
-          value={numberOfElevators}
-          onChange={handleNumberOfElevatorsChange}
-        />
-      </StyledInputContainer>
-      <StyledButton onClick={handleSubmit}>Submit</StyledButton>
-    </StyledFormContainer>
+    <>
+      <StyledFormContainer>
+        <h1>Change system data:</h1>
+        <StyledInputContainer>
+          <label>Number of floors</label>
+          <Input
+            type='number'
+            value={numberOfFloors}
+            onChange={handleNumberOfFloorsChange}
+          />
+        </StyledInputContainer>
+        <StyledInputContainer>
+          <label>Number of elevators</label>
+          <Input
+            type='number'
+            value={numberOfElevators}
+            onChange={handleNumberOfElevatorsChange}
+          />
+        </StyledInputContainer>
+        <StyledButton onClick={handleSubmit}>Submit</StyledButton>
+      </StyledFormContainer>
+      {showError && (
+        <StyledError>
+          At least one of the numbers is invalid, please check!
+        </StyledError>
+      )}
+    </>
   );
 }
