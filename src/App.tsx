@@ -5,6 +5,8 @@ import { ChangeSystemForm } from 'modules/ChangeSystemForm';
 
 const StyledElevatorSystemContainer = styled.div`
   display: flex;
+  margin: 0 20px;
+  justify-content: center;
 `;
 
 const StyledButtonsContainer = styled.div`
